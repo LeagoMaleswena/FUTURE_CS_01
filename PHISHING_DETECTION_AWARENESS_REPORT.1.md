@@ -3,7 +3,7 @@
 
 ---
 
-> **Leago Maleswena**
+> **Prepared by:** Leago Maleswena
 > **Date:** 01 May 2026
 > **Program:** Future Interns — Cyber Security Track
 > **Report Type:** Phishing Email Analysis & Employee Awareness Document
@@ -32,9 +32,9 @@
 
 ## 1. Executive Summary
 
-This report presents the findings of a phishing email detection exercise conducted as part of the Future Interns Cyber Security Internship Program (2026). Four realistic phishing email samples were analysed using email header inspection, domain verification, and URL analysis techniques.
+This report presents the findings of a phishing email detection exercise conducted as part of the Future Interns Cyber Security Internship Program (2026). Four realistic phishing email samples wer[...]
 
-Phishing remains the **number one attack vector** used by cybercriminals globally. According to industry data, over 90% of successful data breaches begin with a phishing email. The goal of this report is to help employees and everyday users recognise the warning signs of a phishing attack before it causes harm.
+Phishing remains the **number one attack vector** used by cybercriminals globally. According to industry data, over 90% of successful data breaches begin with a phishing email. The goal of this re[...]
 
 ### Key Findings at a Glance
 
@@ -178,7 +178,7 @@ The linked URL `http://secure-account-verify.com` was submitted to VirusTotal fo
 | # | Indicator | Explanation |
 |---|-----------|-------------|
 | 1 | **Confirmed malicious by VirusTotal** | 4 security vendors including ESET and CyRadar flagged the URL as malicious/phishing in live analysis. |
-| 2 | **Fake sender domain** | `secure-accounts-verify.com` is not a domain belonging to any known company. Legitimate companies send from their own verified domain (e.g. `@paypal.com`, `@google.com`). |
+| 2 | **Fake sender domain** | `secure-accounts-verify.com` is not a domain belonging to any known company. Legitimate companies send from their own verified domain (e.g. `@paypal.com`, `@google.[...]
 | 3 | **Urgency and fear tactics** | "24 hours", "permanent suspension", "all data deleted" — designed to panic the reader into acting without thinking. |
 | 4 | **Generic greeting** | "Dear Valued Customer" — legitimate services address you by your actual name. |
 | 5 | **Mismatched URL** | The link points to `secure-account-verify[.]com` — a confirmed phishing domain with no legitimate website. |
@@ -190,7 +190,7 @@ The linked URL `http://secure-account-verify.com` was submitted to VirusTotal fo
 
 #### Risk Classification
 
-> 🔴 **PHISHING — CONFIRMED** — Verified by VirusTotal (4/95 vendors), MXToolbox header analysis, and WHOIS domain investigation. Do not click any links. Do not reply. Report to IT security immediately.
+> 🔴 **PHISHING — CONFIRMED** — Verified by VirusTotal (4/95 vendors), MXToolbox header analysis, and WHOIS domain investigation. Do not click any links. Do not reply. Report to IT security[...]
 
 ---
 
@@ -307,7 +307,7 @@ Chief Executive Officer
 
 #### Risk Classification
 
-> 🔴 **PHISHING (Business Email Compromise / BEC)** — This is one of the most financially damaging phishing attacks. Never process wire transfers based solely on email. Always verify by calling the requester directly on a known number.
+> 🔴 **PHISHING (Business Email Compromise / BEC)** — This is one of the most financially damaging phishing attacks. Never process wire transfers based solely on email. Always verify by calli[...]
 
 ---
 
@@ -515,9 +515,9 @@ Phishing works because it exploits **human psychology**, not technical vulnerabi
 
 ## 10. Conclusion
 
-This analysis of four phishing email samples demonstrates how sophisticated and convincing modern phishing attacks have become. The common thread across all samples was the deliberate exploitation of human psychology — urgency, fear, authority, and trust — rather than any technical vulnerability.
+This analysis of four phishing email samples demonstrates how sophisticated and convincing modern phishing attacks have become. The common thread across all samples was the deliberate exploitatio[...]
 
-The most effective defence against phishing is not technology alone, but **an informed and vigilant workforce**. A user who knows how to spot a fake sender domain, hover-check a link, or call to verify an unusual request is far more valuable than the most expensive firewall.
+The most effective defence against phishing is not technology alone, but **an informed and vigilant workforce**. A user who knows how to spot a fake sender domain, hover-check a link, or call to [...]
 
 ### Key Takeaways
 
@@ -540,7 +540,7 @@ The most effective defence against phishing is not technology alone, but **an in
 
 ---
 
-*This report was produced as part of the Future Interns Cyber Security Internship Program (2026). All email samples analysed are illustrative examples created for educational purposes. No real user data was involved.*
+*This report was produced as part of the Future Interns Cyber Security Internship Program (2026). All email samples analysed are illustrative examples created for educational purposes. No real us[...]
 
 ---
 
