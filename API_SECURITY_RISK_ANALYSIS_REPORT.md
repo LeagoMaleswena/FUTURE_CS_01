@@ -3,7 +3,7 @@
 
 ---
 
-> **Prepared by:** [Your Name]
+> **Leago Maleswena**
 > **Date:** 09 May 2026
 > **Program:** Future Interns — Cyber Security Track
 > **Report Type:** Read-Only API Security Risk Analysis
