@@ -3,7 +3,7 @@
 
 ---
 
-> **Leago Maleswena**
+> **Prepared by:** Leago Maleswena
 > **Date:** 09 May 2026
 > **Program:** Future Interns — Cyber Security Track
 > **Report Type:** Read-Only API Security Risk Analysis
@@ -28,7 +28,7 @@
 
 ## 1. Executive Summary
 
-A read-only API Security Risk Analysis was conducted against two publicly authorized test APIs — **JSONPlaceholder** and **ReqRes** — as part of the Future Interns Cyber Security Internship Program (2026). All testing was passive and non-destructive, performed using Postman against APIs explicitly maintained for security testing and learning.
+A read-only API Security Risk Analysis was conducted against two publicly authorized test APIs — **JSONPlaceholder** and **ReqRes** — as part of the Future Interns Cyber Security Internship Program. This report documents the test methodology, findings, and business recommendations.
 
 The analysis revealed **7 security findings** ranging from critical authentication failures to missing security headers and sensitive data over-exposure.
 
@@ -42,7 +42,7 @@ The analysis revealed **7 security findings** ranging from critical authenticati
 
 ### Key Finding
 
-JSONPlaceholder returns the **full personal data of all users** — including names, emails, home addresses with GPS coordinates, and phone numbers — to **any request with zero authentication**. In a real production application, this single flaw could constitute a reportable data breach under POPIA and GDPR.
+JSONPlaceholder returns the **full personal data of all users** — including names, emails, home addresses with GPS coordinates, and phone numbers — to **any request with zero authentication**. This is a critical vulnerability that would constitute a data breach in a production environment.
 
 ---
 
@@ -145,7 +145,7 @@ The API returned complete personal data for all 10 users with zero authenticatio
 
 **Description:** Any person on the internet with no account or credentials can retrieve the complete personal profile of every user in the system with a single request. No username, password, token, or API key is required.
 
-**Business Impact:** In a real application, this constitutes a data breach under POPIA (South Africa) and GDPR (Europe). The company faces regulatory fines, legal liability, and reputational damage. Exposed GPS coordinates could also enable physical harm to users.
+**Business Impact:** In a real application, this constitutes a data breach under POPIA (South Africa) and GDPR (Europe). The company faces regulatory fines, legal liability, and reputational damage.
 
 **Remediation:** Require a valid authentication token on every endpoint before returning data. Unauthenticated requests must return `401 Unauthorized`.
 
@@ -159,7 +159,7 @@ The API returned complete personal data for all 10 users with zero authenticatio
 | **OWASP Category** | API3:2023 — Broken Object Property Level Authorization |
 | **Endpoint** | GET /users |
 
-**Description:** Even if authentication were required, the API returns far more data than necessary — GPS coordinates, full addresses including suite numbers, and internal company metadata are all returned by default.
+**Description:** Even if authentication were required, the API returns far more data than necessary — GPS coordinates, full addresses including suite numbers, and internal company metadata are exposed unnecessarily.
 
 **Business Impact:** Excessive data exposure increases breach severity. Attackers receive a complete dossier on every user rather than just what is needed.
 
@@ -193,9 +193,9 @@ By simply changing the number in the URL — from `/users/1` to `/users/5` — a
 | **OWASP Category** | API1:2023 — Broken Object Level Authorization |
 | **Endpoints** | GET /users/1, GET /users/5, GET /users/{any id} |
 
-**Description:** There is no check to verify whether the person making the request is authorised to view a specific user's record. An attacker can enumerate through every user ID (1, 2, 3, 4...) and systematically harvest every user's data from the entire database.
+**Description:** There is no check to verify whether the person making the request is authorised to view a specific user's record. An attacker can enumerate through every user ID (1, 2, 3, 4...) and download an entire user database in minutes.
 
-**Business Impact:** IDOR is the #1 API vulnerability in the OWASP Top 10. It has caused some of the largest data breaches in history. A single IDOR flaw can expose an entire user database to anyone who discovers it.
+**Business Impact:** IDOR is the #1 API vulnerability in the OWASP Top 10. It has caused some of the largest data breaches in history. A single IDOR flaw can expose an entire user database to any attacker without leaving a meaningful audit trail.
 
 **Remediation:** After authenticating, verify the user owns the requested resource before returning it. Return `403 Forbidden` if a user requests another user's data:
 ```javascript
@@ -254,7 +254,7 @@ app.disable('x-powered-by');
 | **OWASP Category** | API8:2023 — Security Misconfiguration |
 | **Header** | `access-control-allow-credentials: true` |
 
-**Description:** This setting allows any website on the internet to make authenticated requests to this API on behalf of a logged-in user — enabling Cross-Site Request Forgery (CSRF) attacks where a malicious site silently makes API calls as the victim.
+**Description:** This setting allows any website on the internet to make authenticated requests to this API on behalf of a logged-in user — enabling Cross-Site Request Forgery (CSRF) attacks where invisible requests execute from compromised websites.
 
 **Remediation:** Restrict CORS to specific trusted origins only:
 ```javascript
@@ -359,13 +359,13 @@ Status: 401 Unauthorized | Time: 496ms
 ## 8. Business Impact Analysis
 
 **Scenario 1 — Data Breach via Unauthenticated Access (F-01, F-02)**
-An attacker calls `/users` once and downloads the complete user database in under a second — names, emails, addresses, GPS locations. The company faces mandatory breach notification, regulatory fines up to 4% of annual revenue under GDPR, and customer trust loss.
+An attacker calls `/users` once and downloads the complete user database in under a second — names, emails, addresses, GPS locations. The company faces mandatory breach notification, regulatory fines, class-action lawsuits, and permanent loss of customer trust.
 
 **Scenario 2 — Mass Account Harvesting via IDOR (F-03)**
-A malicious user loops through `/users/1` through `/users/10000` and harvests every account's data while appearing as a legitimate user in the logs. No alarms are triggered because each request looks normal individually.
+A malicious user loops through `/users/1` through `/users/10000` and harvests every account's data while appearing as a legitimate user in the logs. No alarms are triggered because each request looks identical to legitimate usage.
 
 **Scenario 3 — Invisible Attack via CORS Misconfiguration (F-05)**
-A malicious website loads invisibly in a victim's browser and silently makes authenticated API calls on their behalf — reading their data, draining accounts, or posting on their behalf — without the user ever knowing.
+A malicious website loads invisibly in a victim's browser and silently makes authenticated API calls on their behalf — reading their data, draining accounts, or posting on their behalf — with the victim completely unaware.
 
 ---
 
@@ -385,14 +385,14 @@ A malicious website loads invisibly in a victim's browser and silently makes aut
 
 ## 10. Conclusion
 
-This API security assessment identified **7 findings**, including 4 rated High severity. The most critical issues — unauthenticated access, IDOR, and CORS misconfiguration — represent foundational security failures that would be classified as reportable incidents under most data protection frameworks.
+This API security assessment identified **7 findings**, including 4 rated High severity. The most critical issues — unauthenticated access, IDOR, and CORS misconfiguration — represent foundational security failures that would result in complete data exfiltration and system compromise in a production environment.
 
-The comparison with ReqRes demonstrated clearly what secure API behaviour looks like — a `401 Unauthorized` response that protects data without leaking system information. This is the standard all production APIs must meet.
+The comparison with ReqRes demonstrated clearly what secure API behaviour looks like — a `401 Unauthorized` response that protects data without leaking system information. This is the standard that should be implemented across all APIs.
 
-APIs are the backbone of modern software. A single insecure endpoint can expose an entire database and bypass all authentication at scale. The findings and remediations in this report reflect the standard of care expected of a professional AppSec engineer or API security consultant.
+APIs are the backbone of modern software. A single insecure endpoint can expose an entire database and bypass all authentication at scale. The findings and remediations in this report reflect the high-impact nature of API security and why it should be a primary focus during development and deployment.
 
 ---
 
-*This report was produced as part of the Future Interns Cyber Security Internship Program (2026). All testing was conducted ethically within the explicitly authorized scope of publicly available test APIs.*
+*This report was produced as part of the Future Interns Cyber Security Internship Program (2026). All testing was conducted ethically within the explicitly authorized scope of publicly available test APIs. No production systems were accessed.*
 
 **Report End**
